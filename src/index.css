@@ -19,11 +19,11 @@
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
 
-  --spacing-nav: 5rem;
+  --spacing-nav: 3.5rem;
 }
 
 :root {
-  --nav-height: 5rem;
+  --nav-height: 3.5rem;
 }
 
 @layer base {
