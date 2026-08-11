@@ -5,15 +5,29 @@ import { brand, nav as navCopy } from '../content/copy'
 const NAV_OFFSET = -56
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
   const [open, setOpen] = useState(false)
   const lenis = useLenis()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => {
+      const heroEl = document.getElementById('hero')
+      if (heroEl) {
+        const rect = heroEl.getBoundingClientRect()
+        // Hero frames sequence is active until hero bottom reaches top of viewport
+        setPastHero(rect.bottom <= window.innerHeight)
+      } else {
+        setPastHero(window.scrollY > 600)
+      }
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   useEffect(() => {
@@ -50,7 +64,7 @@ export function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 h-14 border-b transition-all duration-300 ${
-          scrolled || open
+          pastHero || open
             ? 'border-border/30 bg-surface/80 shadow-xs backdrop-blur-md text-ink'
             : 'border-transparent bg-transparent text-white'
         }`}
@@ -74,7 +88,7 @@ export function Navbar() {
             <span className="font-display text-base font-semibold tracking-tight sm:text-lg">
               {brand.name}
               <span className={`block font-mono text-[8px] font-medium uppercase tracking-[0.22em] transition-colors sm:text-[9px] ${
-                scrolled || open ? 'text-gold' : 'text-gold-soft'
+                pastHero || open ? 'text-gold' : 'text-gold-soft'
               }`}>
                 {brand.tagline}
               </span>
@@ -87,7 +101,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`tap rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-                  scrolled || open
+                  pastHero || open
                     ? 'text-ink-soft hover:bg-parchment hover:text-ink'
                     : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -105,7 +119,7 @@ export function Navbar() {
             <a
               href="#demo"
               className={`tap-lg inline-flex items-center justify-center rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-sm transition-all sm:px-4 ${
-                scrolled || open
+                pastHero || open
                   ? 'bg-forest text-white hover:bg-forest-deep'
                   : 'bg-gold-soft text-forest hover:bg-gold hover:text-white'
               }`}
@@ -121,7 +135,7 @@ export function Navbar() {
             <button
               type="button"
               className={`tap flex items-center justify-center rounded-lg border p-1.5 transition-colors md:hidden ${
-                scrolled || open
+                pastHero || open
                   ? 'border-border bg-white text-ink'
                   : 'border-white/20 bg-white/10 text-white'
               }`}
@@ -134,17 +148,17 @@ export function Navbar() {
               <span className="relative block h-3.5 w-4">
                 <span
                   className={`absolute left-0 h-0.5 w-full transition-all ${
-                    scrolled || open ? 'bg-ink' : 'bg-white'
+                    pastHero || open ? 'bg-ink' : 'bg-white'
                   } ${open ? 'top-1.5 rotate-45' : 'top-0'}`}
                 />
                 <span
                   className={`absolute left-0 top-1.5 h-0.5 w-full transition-opacity ${
-                    scrolled || open ? 'bg-ink' : 'bg-white'
+                    pastHero || open ? 'bg-ink' : 'bg-white'
                   } ${open ? 'opacity-0' : 'opacity-100'}`}
                 />
                 <span
                   className={`absolute left-0 h-0.5 w-full transition-all ${
-                    scrolled || open ? 'bg-ink' : 'bg-white'
+                    pastHero || open ? 'bg-ink' : 'bg-white'
                   } ${open ? 'top-1.5 -rotate-45' : 'top-3'}`}
                 />
               </span>
