@@ -1,5 +1,5 @@
 /** Scroll-driven frame sequence config (files in /public/frames). */
-export const FRAME_COUNT = 240
+export const FRAME_COUNT = 120
 export const FRAME_PAD = 8
 
 export function framePath(index1Based: number): string {
