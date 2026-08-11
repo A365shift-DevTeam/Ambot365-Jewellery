@@ -9,9 +9,122 @@ type Props = {
   mobileContent?: ReactNode
 }
 
+function DefaultMobileStory() {
+  return (
+    <div id="story" className="flex-1 flex flex-col justify-between p-4 sm:p-5 text-ink bg-parchment border-t border-border/40">
+      <div className="flex flex-col gap-2.5">
+        <div className="flex items-center justify-between">
+          <span className="label text-gold font-semibold">
+            Showroom & Credentials
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 px-2.5 py-0.5 font-mono text-[9px] text-gold font-medium border border-gold/30">
+            <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
+            Live Rates
+          </span>
+        </div>
+
+        <div>
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+            Meet <span className="font-display font-extrabold text-gold tracking-wide">Ambot365</span>
+          </h2>
+          <p className="font-body text-xs sm:text-sm text-ink-soft border-l-2 border-gold pl-3 mt-1 font-normal leading-relaxed">
+            True mastery isn&apos;t just about executing a flawless design. It&apos;s about building trust that lasts generations.
+          </p>
+        </div>
+
+        {/* Master Atelier Profile Card */}
+        <div className="flex items-center gap-3 rounded-2xl border border-border bg-white p-3 shadow-sm">
+          <img
+            src="/ambot-logo.png"
+            alt="Ambot365"
+            className="h-9 w-9 object-contain rounded-xl bg-forest p-1 border border-gold/30 shrink-0"
+          />
+          <div>
+            <p className="label text-gold text-[9px] font-semibold">Master Atelier</p>
+            <h3 className="font-display text-base font-bold text-ink leading-tight tracking-tight">Ambot365 Jewellery</h3>
+            <p className="body-fluid text-[11px] text-ink-soft">Certified Gold & Diamond Heritage</p>
+          </div>
+        </div>
+
+        {/* Credentials List */}
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+            <span>BIS Hallmarked 22K & 18K Certified Pure Gold.</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+            <span>Specialized in Bridal Heritage & Diamond Solitaires.</span>
+          </div>
+
+          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+            <span>Private Showroom Viewing & Custom Artisanal Atelier.</span>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2.5 pt-0.5">
+          <a
+            href="#calculator"
+            className="tap-lg flex-1 inline-flex items-center justify-center rounded-full bg-forest hover:bg-forest-deep px-4 py-2.5 text-center font-body text-xs font-bold text-white shadow-md active:scale-95 transition-all"
+          >
+            Gold Calculator
+          </a>
+          <a
+            href="#demo"
+            className="tap-lg flex-1 inline-flex items-center justify-center rounded-full bg-gold-soft hover:bg-gold px-4 py-2.5 text-center font-body text-xs font-bold text-forest shadow-sm active:scale-95 transition-all"
+          >
+            Book Private Visit
+          </a>
+        </div>
+
+        {/* Live Rates Ticker Grid */}
+        <div className="grid grid-cols-3 gap-2 pt-1">
+          <div className="flex flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/10 p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-gold font-bold">22K Gold</span>
+            <span className="font-display text-xs font-bold text-ink mt-0.5">₹7,285 /g</span>
+          </div>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/10 p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-gold font-bold">24K Pure</span>
+            <span className="font-display text-xs font-bold text-ink mt-0.5">₹7,940 /g</span>
+          </div>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-forest/20 bg-forest/5 p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-forest font-bold">Buyback</span>
+            <span className="font-display text-xs font-bold text-forest mt-0.5">100% Value</span>
+          </div>
+        </div>
+
+        {/* Transparent Pricing & Trust Note Card */}
+        <div className="flex items-center gap-2.5 rounded-xl border border-border bg-white/90 p-2.5 shadow-2xs">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold font-bold text-xs">
+            ★
+          </div>
+          <div>
+            <p className="font-body text-[11px] font-semibold text-ink leading-snug">
+              4.9/5 Rating (500+ Verified Customers)
+            </p>
+            <p className="font-body text-[10px] text-ink-soft">
+              Transparent billing • Zero hidden charges • BIS 916 Stamped
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center gap-2 pt-2.5 font-mono text-[10px] uppercase tracking-widest text-muted border-t border-border/40 mt-2">
+        <svg className="h-3.5 w-3.5 animate-bounce text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+        <span>Scroll to scrub showroom frames</span>
+      </div>
+    </div>
+  )
+}
+
 /**
  * Scroll-driven frame sequence hero.
- * Mobile (≤1024): sticky under nav, contain draw, story inside sticky.
+ * Mobile (≤1024): sticky top-0 canvas frame plate floating under transparent navbar.
  * Desktop: full 100dvh cover, separate story below.
  */
 export function ProductPackScroll({ mobileContent }: Props) {
@@ -22,6 +135,8 @@ export function ProductPackScroll({ mobileContent }: Props) {
   const cacheRef = useRef<(HTMLImageElement | null)[]>(Array(FRAME_COUNT + 1).fill(null))
   const lastDrawnRef = useRef(0)
   const progressRef = useRef(0)
+  const lastWidthRef = useRef(0)
+  const lastHeightRef = useRef(0)
   const [loadPct, setLoadPct] = useState(0)
   const [ready, setReady] = useState(false)
 
@@ -70,10 +185,10 @@ export function ProductPackScroll({ mobileContent }: Props) {
     }
 
     ;(async () => {
-      await loadRange(1, Math.min(40, FRAME_COUNT))
-      if (cancelled) return
-      setReady(true)
-      await loadRange(41, FRAME_COUNT)
+      await loadFrame(1)
+      if (!cancelled) setReady(true)
+      await loadRange(2, Math.min(20, FRAME_COUNT))
+      if (!cancelled) await loadRange(21, FRAME_COUNT)
     })()
 
     return () => {
@@ -81,25 +196,24 @@ export function ProductPackScroll({ mobileContent }: Props) {
     }
   }, [])
 
-  // Scroll progress for this track
+  // DOM-based Scroll scrub progress calculation
   useEffect(() => {
     const track = trackRef.current
+    const sticky = stickyRef.current
     if (!track) return
 
     const onScroll = () => {
+      const padTop = parseFloat(getComputedStyle(track).paddingTop) || 0
+      const stickyH = sticky ? sticky.offsetHeight : window.innerHeight
+      const travel = Math.max(track.offsetHeight - padTop - stickyH, 1)
       const rect = track.getBoundingClientRect()
-      const total = track.offsetHeight - window.innerHeight
-      if (total <= 0) {
-        progressRef.current = 0
-        return
-      }
       const scrolled = -rect.top
-      progressRef.current = Math.min(1, Math.max(0, scrolled / total))
+      progressRef.current = Math.min(1, Math.max(0, scrolled / travel))
     }
 
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
+    window.addEventListener('resize', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
@@ -115,8 +229,9 @@ export function ProductPackScroll({ mobileContent }: Props) {
 
     let raf = 0
     let dpr = 1
+    const WOBBLE_THRESHOLD = 160 // Chrome wobble guard
 
-    const resize = () => {
+    const resize = (force = false) => {
       const parent = canvas.parentElement
       if (!parent) return
       dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -124,12 +239,28 @@ export function ProductPackScroll({ mobileContent }: Props) {
       const h = parent.clientHeight
       const bw = Math.max(1, Math.round(w * dpr))
       const bh = Math.max(1, Math.round(h * dpr))
-      if (canvas.width !== bw || canvas.height !== bh) {
-        canvas.width = bw
-        canvas.height = bh
-        lastDrawnRef.current = 0
+
+      const widthChanged = Math.abs(bw - lastWidthRef.current) > 2
+      const heightChanged = Math.abs(bh - lastHeightRef.current) > WOBBLE_THRESHOLD
+
+      if (force || lastWidthRef.current === 0 || widthChanged || heightChanged) {
+        if (canvas.width !== bw || canvas.height !== bh) {
+          canvas.width = bw
+          canvas.height = bh
+          lastDrawnRef.current = 0
+        }
+        lastWidthRef.current = bw
+        lastHeightRef.current = bh
       }
     }
+
+    const onOrientation = () => {
+      lastWidthRef.current = 0
+      lastHeightRef.current = 0
+      lastDrawnRef.current = 0
+      resize(true)
+    }
+    window.addEventListener('orientationchange', onOrientation)
 
     const drawImage = (img: HTMLImageElement, mode: 'contain' | 'cover') => {
       const cw = canvas.width
@@ -138,11 +269,10 @@ export function ProductPackScroll({ mobileContent }: Props) {
       const ih = img.naturalHeight
       if (!iw || !ih || !cw || !ch) return
 
-      ctx.fillStyle = '#0d4f3c'
+      ctx.fillStyle = isMobile ? '#0d4f3c' : '#141414'
       ctx.fillRect(0, 0, cw, ch)
 
       if (mode === 'contain') {
-        // Full width, top-aligned (no side crop on narrow screens)
         const scale = cw / iw
         const dw = cw
         const dh = ih * scale
@@ -157,9 +287,11 @@ export function ProductPackScroll({ mobileContent }: Props) {
       }
     }
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     const tick = () => {
       resize()
-      const target = progressToFrame(progressRef.current)
+      const target = prefersReducedMotion ? 1 : progressToFrame(progressRef.current)
       const cache = cacheRef.current
       let frame = target
 
@@ -184,18 +316,18 @@ export function ProductPackScroll({ mobileContent }: Props) {
       if (cache[frame] && (frame !== lastDrawnRef.current || lastDrawnRef.current === 0)) {
         drawImage(cache[frame]!, mode)
         lastDrawnRef.current = frame
-      } else if (cache[frame] && lastDrawnRef.current === frame) {
-        // Redraw on resize only (handled by lastDrawn reset)
       }
 
       // Prefetch neighbors
-      for (let d = -2; d <= 12; d++) {
-        const i = target + d
-        if (i < 1 || i > FRAME_COUNT || cache[i]) continue
-        const img = new Image()
-        img.src = framePath(i)
-        img.onload = () => {
-          cache[i] = img
+      if (!prefersReducedMotion) {
+        for (let d = -2; d <= 12; d++) {
+          const i = target + d
+          if (i < 1 || i > FRAME_COUNT || cache[i]) continue
+          const img = new Image()
+          img.src = framePath(i)
+          img.onload = () => {
+            cache[i] = img
+          }
         }
       }
 
@@ -211,28 +343,31 @@ export function ProductPackScroll({ mobileContent }: Props) {
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
+      window.removeEventListener('orientationchange', onOrientation)
     }
   }, [isMobile])
 
-  // Mobile layout
+  // Mobile layout: sticky top-0 canvas frame plate floating under transparent navbar
   if (isMobile) {
     return (
       <section id="hero" aria-label="Showroom walkthrough" className="bg-forest">
         <div
           ref={trackRef}
-          className="relative h-[300vh] pt-[var(--nav-height)]"
+          className="relative min-h-[calc(200vh-var(--nav-height))]"
         >
           <div
             ref={stickyRef}
-            className="sticky top-[var(--nav-height)] z-0 flex flex-col bg-forest"
+            className="sticky top-0 z-0 flex flex-col min-h-[100dvh] bg-parchment overflow-hidden"
           >
+            {/* 16:9 Canvas Frame Plate — starts at top:0 under transparent navbar */}
             <div
-              className="relative w-full bg-forest"
-              style={{ height: 'calc(100vw * 9 / 16)' }}
+              className="relative w-full shrink-0 bg-forest"
+              style={{ aspectRatio: '16 / 9', width: '100%' }}
             >
               <canvas
                 ref={canvasRef}
-                className="pointer-events-none absolute inset-0 h-full w-full touch-none"
+                className="pointer-events-none absolute inset-0 h-full w-full touch-none object-cover"
+                style={{ transform: 'translateZ(0)', willChange: 'transform' }}
               />
               {!ready && (
                 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-forest/90 text-white">
@@ -243,7 +378,7 @@ export function ProductPackScroll({ mobileContent }: Props) {
                 </div>
               )}
             </div>
-            {mobileContent}
+            {mobileContent || <DefaultMobileStory />}
           </div>
         </div>
       </section>
@@ -260,7 +395,8 @@ export function ProductPackScroll({ mobileContent }: Props) {
         >
           <canvas
             ref={canvasRef}
-            className="pointer-events-none absolute inset-0 h-full w-full touch-none"
+            className="pointer-events-none absolute inset-0 h-full w-full touch-none object-cover"
+            style={{ transform: 'translateZ(0)', willChange: 'transform' }}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-ink/20"
