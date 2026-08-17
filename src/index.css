@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-surface: #faf9f7;
-  --color-ink: #141414;
-  --color-ink-soft: #4a4a4a;
-  --color-muted: #6b6b6b;
-  --color-border: rgba(20, 20, 20, 0.12);
-  --color-accent: #1a6b52;
-  --color-forest: #0d4f3c;
-  --color-forest-deep: #0a3a2c;
-  --color-gold: #b8952c;
-  --color-gold-soft: #d4b85a;
-  --color-parchment: #f3f0ea;
-  --color-parchment-deep: #e8e2d6;
+  --color-surface: #0a0907;
+  --color-surface-dark: #070604;
+  --color-surface-card: #181510;
+  --color-surface-card-end: #0e0c09;
+  --color-ink: #f7f3e9;
+  --color-ink-soft: #e9e9e7;
+  --color-muted: #aca6a2;
+  --color-muted-dark: #625954;
+  --color-border: rgba(212, 175, 55, 0.16);
+  --color-border-bright: rgba(212, 175, 55, 0.45);
+  --color-accent: #008134;
+  --color-forest: #008134;
+  --color-forest-deep: #005824;
+  --color-gold: #d4af37;
+  --color-gold-bright: #e7c960;
+  --color-gold-soft: #f2d98d;
+  --color-gold-deep: #a86d0a;
+  --color-gold-bronze: #b98333;
+  --color-parchment: #14120e;
+  --color-parchment-deep: #181510;
 
-  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-mono: "DM Mono", ui-monospace, monospace;
@@ -29,19 +37,22 @@
 @layer base {
   html {
     scroll-behavior: auto;
+    background-color: #0a0907;
+    color-scheme: dark;
   }
 
   html,
   body,
   #root {
     min-height: 100%;
+    background-color: #0a0907;
   }
 
   body {
     margin: 0;
     font-family: var(--font-body);
     color: var(--color-ink);
-    background: var(--color-surface);
+    background: #0a0907;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -71,7 +82,8 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-gold) 35%, transparent);
+    background: rgba(212, 175, 55, 0.35);
+    color: #ffffff;
   }
 }
 
@@ -81,23 +93,23 @@
   }
 
   .label {
-    @apply font-mono text-[10px] uppercase tracking-[0.35em] sm:text-xs;
+    @apply font-mono text-[10px] uppercase tracking-[0.3em] sm:text-xs text-[#e7c960];
   }
 
   .section-pad {
-    @apply py-14 sm:py-16 md:py-20 lg:py-24;
+    @apply py-16 sm:py-20 md:py-24 lg:py-28;
   }
 
   .heading-fluid {
-    @apply font-serif text-[34px] leading-[1.08] tracking-tight sm:text-[46px] md:text-[58px];
+    @apply font-serif text-[34px] leading-[1.08] tracking-tight text-white sm:text-[46px] md:text-[58px];
   }
 
   .body-fluid {
-    @apply text-[14px] font-light leading-relaxed sm:text-[15px];
+    @apply text-[14px] font-light leading-relaxed text-[#aca6a2] sm:text-[15px];
   }
 
   .num-fluid {
-    @apply font-mono text-[28px] tabular-nums sm:text-[32px];
+    @apply font-mono text-[28px] tabular-nums text-[#e7c960] sm:text-[32px];
   }
 
   /* Adaptive grids */
@@ -110,7 +122,7 @@
   }
 
   .grid-adaptive-4 {
-    @apply grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10;
+    @apply grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-8;
   }
 
   .grid-adaptive-sidebar {
@@ -118,14 +130,358 @@
   }
 
   .tap {
-    @apply min-h-11 min-w-11 active:scale-95 active:opacity-70;
+    @apply min-h-11 min-w-11 active:scale-95 active:opacity-80 transition-transform;
   }
 
   .tap-lg {
-    @apply min-h-12 active:scale-95 active:opacity-70;
+    @apply min-h-12 active:scale-95 active:opacity-80 transition-transform;
   }
 
+  /* Dark Luxury Golden Components */
   .surface-card {
-    @apply rounded-xl border border-border bg-white shadow-sm sm:rounded-2xl md:rounded-3xl;
+    background: linear-gradient(135deg, #181510 0%, #0e0c09 100%);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(212, 175, 55, 0.08) inset;
+    border-radius: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .surface-card:hover {
+    border-color: rgba(212, 175, 55, 0.38);
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.9), 0 0 20px -2px rgba(212, 175, 55, 0.15);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #fff5c0 0%, #e7c960 38%, #d4af37 68%, #c59a1a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gold-gradient-shimmer {
+    background: linear-gradient(102deg, #fff4cd 0%, #f2d98d 28%, #d4af37 62%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btn-gold {
+    background: linear-gradient(to right bottom, #e7c960 0%, #a86d0a 100%);
+    color: #070604;
+    font-weight: 700;
+    box-shadow: 0 4px 20px -2px rgba(212, 175, 55, 0.35);
+    border: 1px solid rgba(255, 245, 192, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(to right bottom, #fff0aa 0%, #c59a1a 100%);
+    box-shadow: 0 6px 28px 0 rgba(231, 201, 96, 0.55);
+    transform: translateY(-1px);
+  }
+
+  .btn-gold-outline {
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: #e7c960;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+  }
+
+  .btn-gold-outline:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.65);
+    color: #fff5c0;
+    box-shadow: 0 0 20px -3px rgba(212, 175, 55, 0.25);
+  }
+
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.75) 50%, rgba(212, 175, 55, 0) 100%);
+  }
+
+  .gold-glow-radial {
+    background-image: radial-gradient(60% 80% at 50% 0%, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0) 70%);
   }
 }
+
+/* Light mode golden theme overrides */
+html.light {
+  background-color: #faf8f5 !important;
+  color-scheme: light;
+}
+
+html.light body,
+html.light #root {
+  background-color: #faf8f5 !important;
+  color: #14120e !important;
+}
+
+/* Light mode gold gradient: Rich, deep metallic gold with high contrast */
+html.light .gold-gradient-text,
+html.light .gold-gradient-shimmer {
+  background: linear-gradient(135deg, #8a5700 0%, #b8860b 45%, #a86d0a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+html.light .label {
+  color: #8a5700 !important;
+  font-weight: 700 !important;
+}
+
+html.light .heading-fluid {
+  color: #14120e !important;
+}
+
+html.light .body-fluid {
+  color: #3d352e !important;
+  font-weight: 400 !important;
+}
+
+html.light .surface-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fbf8f2 100%) !important;
+  border-color: rgba(184, 149, 44, 0.25) !important;
+  box-shadow: 0 10px 30px -8px rgba(168, 109, 10, 0.08), 0 0 1px 1px rgba(212, 175, 55, 0.12) inset !important;
+}
+
+html.light .surface-card:hover {
+  border-color: rgba(184, 149, 44, 0.5) !important;
+  box-shadow: 0 14px 36px -8px rgba(168, 109, 10, 0.16) !important;
+}
+
+/* Section overrides for light mode */
+html.light section {
+  background-color: #faf8f5 !important;
+}
+
+html.light #calculator,
+html.light #collections,
+html.light #gallery,
+html.light #craft,
+html.light #visit,
+html.light #demo {
+  background-color: #faf8f5 !important;
+}
+
+/* Craft Section Light Mode */
+html.light #craft h2 {
+  color: #14120e !important;
+}
+html.light #craft p {
+  color: #3d352e !important;
+}
+html.light #craft .tap.min-h-12 {
+  background-color: #ffffff !important;
+  color: #14120e !important;
+  border-color: rgba(168, 109, 10, 0.3) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+}
+html.light #craft .tap.min-h-12:hover {
+  background-color: #fcf6e8 !important;
+  color: #8a5700 !important;
+  border-color: #8a5700 !important;
+}
+html.light #craft .surface-card h3 {
+  color: #8a5700 !important;
+  font-weight: 700 !important;
+}
+html.light #craft .surface-card p {
+  color: #4a4238 !important;
+}
+html.light #craft .surface-card span.bg-\[\#e7c960\] {
+  background-color: #8a5700 !important;
+}
+
+/* Visit Section Light Mode */
+html.light #visit h2 {
+  color: #14120e !important;
+}
+html.light #visit p {
+  color: #3d352e !important;
+}
+html.light #visit li {
+  color: #14120e !important;
+  font-weight: 500 !important;
+  border-color: rgba(168, 109, 10, 0.2) !important;
+}
+html.light #visit li::before {
+  background-color: #8a5700 !important;
+}
+
+/* Collections Section Light Mode */
+html.light #collections h2 {
+  color: #14120e !important;
+}
+html.light #collections .surface-card h3 {
+  color: #14120e !important;
+  font-weight: 700 !important;
+}
+html.light #collections .surface-card p {
+  color: #4a4238 !important;
+}
+html.light #collections .surface-card span.font-mono {
+  background-color: rgba(212, 175, 55, 0.18) !important;
+  color: #8a5700 !important;
+  border-color: rgba(168, 109, 10, 0.35) !important;
+}
+
+/* Gallery Section Light Mode */
+html.light #gallery h2 {
+  color: #14120e !important;
+}
+html.light #gallery figcaption {
+  background-color: #ffffff !important;
+  border-color: rgba(168, 109, 10, 0.2) !important;
+}
+html.light #gallery figcaption h3 {
+  color: #14120e !important;
+}
+html.light #gallery figcaption p {
+  color: #625954 !important;
+}
+html.light #gallery figure > div:first-child {
+  background: linear-gradient(to bottom, #ffffff, #f7f4ee) !important;
+}
+
+/* Calculator Section Light Mode */
+html.light #calculator h2 {
+  color: #14120e !important;
+}
+html.light #calculator .surface-card > div:first-child {
+  background-color: #fdfaf4 !important;
+}
+html.light #calculator legend,
+html.light #calculator label {
+  color: #221c16 !important;
+  font-weight: 700 !important;
+}
+html.light #calculator label.tap-lg:not(:has(:checked)) {
+  background-color: #ffffff !important;
+  color: #3d352e !important;
+  border-color: rgba(168, 109, 10, 0.25) !important;
+}
+html.light #calculator label.tap-lg:has(:checked) {
+  background-color: rgba(212, 175, 55, 0.25) !important;
+  color: #8a5700 !important;
+  border-color: #8a5700 !important;
+  font-weight: 700 !important;
+}
+html.light #calculator select,
+html.light #calculator input {
+  background-color: #ffffff !important;
+  color: #14120e !important;
+  border-color: rgba(168, 109, 10, 0.35) !important;
+}
+html.light #calculator .relative > span {
+  color: #8a5700 !important;
+}
+html.light #calculator .border-\[\#d4af37\]\/30 {
+  background-color: #fbf6ec !important;
+  border-color: rgba(168, 109, 10, 0.35) !important;
+}
+html.light #calculator .border-\[\#d4af37\]\/30 span {
+  color: #625954 !important;
+}
+html.light #calculator .border-\[\#d4af37\]\/30 strong {
+  color: #8a5700 !important;
+}
+
+/* CTA & Form Section Light Mode */
+html.light #demo h2 {
+  color: #14120e !important;
+}
+html.light #demo .body-fluid {
+  color: #3d352e !important;
+}
+html.light form.surface-card {
+  background: #ffffff !important;
+}
+html.light form label {
+  color: #221c16 !important;
+  font-weight: 700 !important;
+}
+html.light form input,
+html.light form select,
+html.light form textarea {
+  background-color: #ffffff !important;
+  color: #14120e !important;
+  border-color: rgba(168, 109, 10, 0.35) !important;
+}
+html.light form textarea::placeholder {
+  color: #8c8278 !important;
+}
+html.light #demo [role="status"] h3 {
+  color: #14120e !important;
+}
+html.light #demo [role="status"] > div:first-child {
+  background-color: rgba(212, 175, 55, 0.2) !important;
+  border-color: #8a5700 !important;
+  color: #8a5700 !important;
+}
+
+/* Footer Section Light Mode */
+html.light footer {
+  background-color: #f3ede2 !important;
+  border-color: rgba(184, 149, 44, 0.25) !important;
+}
+html.light footer .font-display {
+  color: #14120e !important;
+}
+html.light footer .font-mono {
+  color: #8a5700 !important;
+}
+html.light footer .body-fluid {
+  color: #4a4238 !important;
+}
+html.light footer a {
+  color: #4a4238 !important;
+}
+html.light footer a:hover {
+  color: #8a5700 !important;
+}
+html.light footer input {
+  background-color: #ffffff !important;
+  color: #14120e !important;
+  border-color: rgba(184, 149, 44, 0.35) !important;
+}
+html.light footer .tap.h-10 {
+  background-color: #ffffff !important;
+  border-color: rgba(184, 149, 44, 0.3) !important;
+  color: #8a5700 !important;
+}
+html.light footer .border-t {
+  border-color: rgba(184, 149, 44, 0.2) !important;
+  color: #625954 !important;
+}
+
+/* Mobile Story Light Mode */
+html.light #story {
+  background-color: #faf8f5 !important;
+  color: #14120e !important;
+  border-color: rgba(168, 109, 10, 0.2) !important;
+}
+html.light #story h2,
+html.light #story h3 {
+  color: #14120e !important;
+}
+html.light #story p {
+  color: #4a4238 !important;
+}
+html.light #story .flex-col > div.rounded-xl {
+  background: #ffffff !important;
+  border-color: rgba(168, 109, 10, 0.25) !important;
+  color: #14120e !important;
+}
+html.light #story .grid-cols-3 > div {
+  background: #ffffff !important;
+  border-color: rgba(168, 109, 10, 0.3) !important;
+}
+html.light #story .grid-cols-3 span:last-child {
+  color: #14120e !important;
+}
+html.light #story .surface-card {
+  background: #ffffff !important;
+}
+
+
+

@@ -11,70 +11,70 @@ type Props = {
 
 function DefaultMobileStory() {
   return (
-    <div id="story" className="flex-1 flex flex-col justify-between p-4 sm:p-5 text-ink bg-parchment border-t border-border/40">
-      <div className="flex flex-col gap-2.5">
+    <div id="story" className="flex-1 flex flex-col justify-between p-4 sm:p-5 text-[#f7f3e9] bg-[#0a0907] border-t border-[#d4af37]/20">
+      <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <span className="label text-gold font-semibold">
+          <span className="label text-[#e7c960] font-semibold">
             Showroom & Credentials
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 px-2.5 py-0.5 font-mono text-[9px] text-gold font-medium border border-gold/30">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#d4af37]/15 px-2.5 py-0.5 font-mono text-[9px] text-[#e7c960] font-medium border border-[#d4af37]/35">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#e7c960] animate-pulse" />
             Live Rates
           </span>
         </div>
 
         <div>
-          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-            Meet <span className="font-display font-extrabold text-gold tracking-wide">Ambot365</span>
+          <h2 className="font-display text-2xl font-bold tracking-tight text-white">
+            Meet <span className="font-display font-extrabold gold-gradient-text tracking-wide">Ambot365</span>
           </h2>
-          <p className="font-body text-xs sm:text-sm text-ink-soft border-l-2 border-gold pl-3 mt-1 font-normal leading-relaxed">
+          <p className="font-body text-xs sm:text-sm text-[#aca6a2] border-l-2 border-[#d4af37] pl-3 mt-1.5 font-normal leading-relaxed">
             True mastery isn&apos;t just about executing a flawless design. It&apos;s about building trust that lasts generations.
           </p>
         </div>
 
         {/* Master Atelier Profile Card */}
-        <div className="flex items-center gap-3 rounded-2xl border border-border bg-white p-3 shadow-sm">
+        <div className="surface-card flex items-center gap-3 p-3">
           <img
             src="/ambot-logo.png"
             alt="Ambot365"
-            className="h-9 w-9 object-contain rounded-xl bg-forest p-1 border border-gold/30 shrink-0"
+            className="h-10 w-10 object-contain rounded-xl bg-[#0a0907] p-1.5 border border-[#d4af37]/40 shrink-0"
           />
           <div>
-            <p className="label text-gold text-[9px] font-semibold">Master Atelier</p>
-            <h3 className="font-display text-base font-bold text-ink leading-tight tracking-tight">Ambot365 Jewellery</h3>
-            <p className="body-fluid text-[11px] text-ink-soft">Certified Gold & Diamond Heritage</p>
+            <p className="label text-[#e7c960] text-[9px] font-semibold">Master Atelier</p>
+            <h3 className="font-display text-base font-bold text-white leading-tight tracking-tight">Ambot365 Jewellery</h3>
+            <p className="body-fluid text-[11px] text-[#aca6a2]">Certified Gold & Diamond Heritage</p>
           </div>
         </div>
 
         {/* Credentials List */}
         <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+          <div className="flex items-center gap-2.5 rounded-xl border border-[#d4af37]/20 bg-[#181510] px-3 py-2 text-xs font-body font-medium text-[#e9e9e7]">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#d4af37]/40 bg-[#d4af37]/15 text-[#e7c960] font-mono text-[9px] font-bold">✓</span>
             <span>BIS Hallmarked 22K & 18K Certified Pure Gold.</span>
           </div>
 
-          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+          <div className="flex items-center gap-2.5 rounded-xl border border-[#d4af37]/20 bg-[#181510] px-3 py-2 text-xs font-body font-medium text-[#e9e9e7]">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#d4af37]/40 bg-[#d4af37]/15 text-[#e7c960] font-mono text-[9px] font-bold">✓</span>
             <span>Specialized in Bridal Heritage & Diamond Solitaires.</span>
           </div>
 
-          <div className="flex items-center gap-2.5 rounded-xl border border-border/80 bg-white px-3 py-2 text-xs font-body font-medium text-ink-soft shadow-xs">
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-forest/30 bg-forest/10 text-forest font-mono text-[9px] font-bold">✓</span>
+          <div className="flex items-center gap-2.5 rounded-xl border border-[#d4af37]/20 bg-[#181510] px-3 py-2 text-xs font-body font-medium text-[#e9e9e7]">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#d4af37]/40 bg-[#d4af37]/15 text-[#e7c960] font-mono text-[9px] font-bold">✓</span>
             <span>Private Showroom Viewing & Custom Artisanal Atelier.</span>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2.5 pt-0.5">
+        <div className="flex items-center gap-2.5 pt-1">
           <a
             href="#calculator"
-            className="tap-lg flex-1 inline-flex items-center justify-center rounded-full bg-forest hover:bg-forest-deep px-4 py-2.5 text-center font-body text-xs font-bold text-white shadow-md active:scale-95 transition-all"
+            className="btn-gold tap-lg flex-1 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-center font-body text-xs font-bold shadow-md"
           >
             Gold Calculator
           </a>
           <a
             href="#demo"
-            className="tap-lg flex-1 inline-flex items-center justify-center rounded-full bg-gold-soft hover:bg-gold px-4 py-2.5 text-center font-body text-xs font-bold text-forest shadow-sm active:scale-95 transition-all"
+            className="btn-gold-outline tap-lg flex-1 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-center font-body text-xs font-bold"
           >
             Book Private Visit
           </a>
@@ -82,38 +82,38 @@ function DefaultMobileStory() {
 
         {/* Live Rates Ticker Grid */}
         <div className="grid grid-cols-3 gap-2 pt-1">
-          <div className="flex flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/10 p-2 text-center">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-gold font-bold">22K Gold</span>
-            <span className="font-display text-xs font-bold text-ink mt-0.5">₹7,285 /g</span>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-[#d4af37]/30 bg-[#181510] p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#e7c960] font-bold">22K Gold</span>
+            <span className="font-display text-xs font-bold text-white mt-0.5">₹7,285 /g</span>
           </div>
-          <div className="flex flex-col items-center justify-center rounded-xl border border-gold/30 bg-gold/10 p-2 text-center">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-gold font-bold">24K Pure</span>
-            <span className="font-display text-xs font-bold text-ink mt-0.5">₹7,940 /g</span>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-[#d4af37]/30 bg-[#181510] p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#e7c960] font-bold">24K Pure</span>
+            <span className="font-display text-xs font-bold text-white mt-0.5">₹7,940 /g</span>
           </div>
-          <div className="flex flex-col items-center justify-center rounded-xl border border-forest/20 bg-forest/5 p-2 text-center">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-forest font-bold">Buyback</span>
-            <span className="font-display text-xs font-bold text-forest mt-0.5">100% Value</span>
+          <div className="flex flex-col items-center justify-center rounded-xl border border-[#008134]/40 bg-[#008134]/15 p-2 text-center">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#e7c960] font-bold">Buyback</span>
+            <span className="font-display text-xs font-bold text-[#e7c960] mt-0.5">100% Value</span>
           </div>
         </div>
 
         {/* Transparent Pricing & Trust Note Card */}
-        <div className="flex items-center gap-2.5 rounded-xl border border-border bg-white/90 p-2.5 shadow-2xs">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold font-bold text-xs">
+        <div className="surface-card flex items-center gap-2.5 p-2.5">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#d4af37]/20 text-[#e7c960] font-bold text-xs">
             ★
           </div>
           <div>
-            <p className="font-body text-[11px] font-semibold text-ink leading-snug">
+            <p className="font-body text-[11px] font-semibold text-white leading-snug">
               4.9/5 Rating (500+ Verified Customers)
             </p>
-            <p className="font-body text-[10px] text-ink-soft">
+            <p className="font-body text-[10px] text-[#aca6a2]">
               Transparent billing • Zero hidden charges • BIS 916 Stamped
             </p>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 pt-2.5 font-mono text-[10px] uppercase tracking-widest text-muted border-t border-border/40 mt-2">
-        <svg className="h-3.5 w-3.5 animate-bounce text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="flex items-center justify-center gap-2 pt-2.5 font-mono text-[10px] uppercase tracking-widest text-[#aca6a2] border-t border-[#d4af37]/20 mt-2">
+        <svg className="h-3.5 w-3.5 animate-bounce text-[#e7c960]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
         <span>Scroll to scrub showroom frames</span>
@@ -269,7 +269,7 @@ export function ProductPackScroll({ mobileContent }: Props) {
       const ih = img.naturalHeight
       if (!iw || !ih || !cw || !ch) return
 
-      ctx.fillStyle = isMobile ? '#0d4f3c' : '#141414'
+      ctx.fillStyle = '#0a0907'
       ctx.fillRect(0, 0, cw, ch)
 
       if (mode === 'contain') {
@@ -350,18 +350,18 @@ export function ProductPackScroll({ mobileContent }: Props) {
   // Mobile layout: sticky top-0 canvas frame plate floating under transparent navbar
   if (isMobile) {
     return (
-      <section id="hero" aria-label="Showroom walkthrough" className="bg-forest">
+      <section id="hero" aria-label="Showroom walkthrough" className="bg-[#0a0907]">
         <div
           ref={trackRef}
           className="relative min-h-[calc(200vh-var(--nav-height))]"
         >
           <div
             ref={stickyRef}
-            className="sticky top-0 z-0 flex flex-col min-h-[100dvh] bg-parchment overflow-hidden"
+            className="sticky top-0 z-0 flex flex-col min-h-[100dvh] bg-[#0a0907] overflow-hidden"
           >
             {/* 16:9 Canvas Frame Plate — starts at top:0 under transparent navbar */}
             <div
-              className="relative w-full shrink-0 bg-forest"
+              className="relative w-full shrink-0 bg-[#0a0907]"
               style={{ aspectRatio: '16 / 9', width: '100%' }}
             >
               <canvas
@@ -370,9 +370,9 @@ export function ProductPackScroll({ mobileContent }: Props) {
                 style={{ transform: 'translateZ(0)', willChange: 'transform' }}
               />
               {!ready && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-forest/90 text-white">
-                  <div className="h-9 w-9 animate-spin rounded-full border-2 border-gold-soft border-t-transparent" />
-                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold-soft">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#0a0907]/90 text-white">
+                  <div className="h-9 w-9 animate-spin rounded-full border-2 border-[#e7c960] border-t-transparent" />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#e7c960]">
                     Loading {loadPct}%
                   </p>
                 </div>
@@ -387,11 +387,11 @@ export function ProductPackScroll({ mobileContent }: Props) {
 
   // Desktop layout
   return (
-    <section id="hero" aria-label="Showroom walkthrough" className="bg-ink">
+    <section id="hero" aria-label="Showroom walkthrough" className="bg-[#0a0907] relative">
       <div ref={trackRef} className="relative h-[240vh]">
         <div
           ref={stickyRef}
-          className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-ink"
+          className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#0a0907]"
         >
           <canvas
             ref={canvasRef}
@@ -399,13 +399,17 @@ export function ProductPackScroll({ mobileContent }: Props) {
             style={{ transform: 'translateZ(0)', willChange: 'transform' }}
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-ink/20"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0907] via-transparent to-[#0a0907]/40"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 gold-glow-radial"
             aria-hidden
           />
           {!ready && (
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-ink/80 text-white">
-              <div className="h-10 w-10 animate-spin rounded-full border-2 border-gold-soft border-t-transparent" />
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold-soft">
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#0a0907]/90 text-white">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#e7c960] border-t-transparent" />
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#e7c960]">
                 Loading showroom {loadPct}%
               </p>
             </div>

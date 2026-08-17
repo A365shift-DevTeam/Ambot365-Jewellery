@@ -1,3 +1,4 @@
+import { ThemeProvider } from './context/ThemeContext'
 import { SmoothScroll } from './components/SmoothScroll'
 import { Navbar } from './components/Navbar'
 import { ProductPackScroll } from './components/ProductPackScroll'
@@ -11,26 +12,29 @@ import { Footer } from './components/sections/Footer'
 
 export default function App() {
   return (
-    <SmoothScroll>
-      <div className="min-h-screen overflow-x-clip antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-forest focus:px-4 focus:py-3 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Navbar />
-        <main id="main">
-          <ProductPackScroll />
-          <MetalCalculator />
-          <Collections />
-          <Gallery />
-          <CraftSection />
-          <Visit />
-          <CTA />
-        </main>
-        <Footer />
-      </div>
-    </SmoothScroll>
+    <ThemeProvider>
+      <SmoothScroll>
+        <div className="min-h-screen overflow-x-clip antialiased">
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#e7c960] focus:px-4 focus:py-3 focus:font-bold focus:text-[#070604] focus:shadow-lg"
+          >
+            Skip to content
+          </a>
+          <Navbar />
+          <main id="main">
+            <ProductPackScroll />
+            <MetalCalculator />
+            <Collections />
+            <Gallery />
+            <CraftSection />
+            <Visit />
+            <CTA />
+          </main>
+          <Footer />
+        </div>
+      </SmoothScroll>
+    </ThemeProvider>
   )
 }
+

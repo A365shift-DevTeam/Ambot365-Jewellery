@@ -52,11 +52,14 @@ export function DemoForm() {
   if (success) {
     return (
       <div className="surface-card p-6 sm:p-8" role="status">
-        <h3 className="font-serif text-2xl text-forest">{cta.successTitle}</h3>
-        <p className="body-fluid mt-2 text-muted">{cta.successBody}</p>
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#e7c960] font-bold text-xl mb-4">
+          ✓
+        </div>
+        <h3 className="font-serif text-2xl text-white">{cta.successTitle}</h3>
+        <p className="body-fluid mt-2 text-[#aca6a2]">{cta.successBody}</p>
         <button
           type="button"
-          className="tap-lg mt-5 inline-flex items-center justify-center rounded-full border border-border px-5 font-semibold"
+          className="btn-gold-outline tap-lg mt-6 inline-flex items-center justify-center rounded-full px-6 py-2 text-sm font-semibold"
           onClick={() => {
             setSuccess(false)
             setName('')
@@ -73,7 +76,7 @@ export function DemoForm() {
   }
 
   return (
-    <form className="surface-card flex flex-col gap-4 p-5 sm:p-7" onSubmit={onSubmit} noValidate>
+    <form className="surface-card flex flex-col gap-4.5 p-6 sm:p-8" onSubmit={onSubmit} noValidate>
       <Field
         id="demo-name"
         label={formCopy.fields.name}
@@ -100,39 +103,40 @@ export function DemoForm() {
         autoComplete="address-level2"
       />
       <div>
-        <label htmlFor="demo-role" className="mb-1.5 block text-sm font-medium text-ink-soft">
+        <label htmlFor="demo-role" className="mb-1.5 block text-xs font-mono uppercase tracking-wider text-[#e7c960]">
           {formCopy.fields.role}
         </label>
         <select
           id="demo-role"
-          className="tap-lg w-full rounded-xl border border-border bg-white px-3 sm:rounded-2xl"
+          className="tap-lg w-full rounded-xl border border-[#d4af37]/25 bg-[#070604] px-3.5 text-sm text-white focus:border-[#e7c960] focus:outline-none focus:ring-1 focus:ring-[#e7c960] sm:rounded-2xl"
           value={role}
           onChange={(e) => setRole(e.target.value)}
         >
-          <option value="">Select…</option>
+          <option value="" className="bg-[#070604] text-[#aca6a2]">Select occasion…</option>
           {formCopy.roles.map((r) => (
-            <option key={r} value={r}>
+            <option key={r} value={r} className="bg-[#070604] text-white">
               {r}
             </option>
           ))}
         </select>
       </div>
       <div>
-        <label htmlFor="demo-message" className="mb-1.5 block text-sm font-medium text-ink-soft">
+        <label htmlFor="demo-message" className="mb-1.5 block text-xs font-mono uppercase tracking-wider text-[#e7c960]">
           {formCopy.fields.message}
         </label>
         <textarea
           id="demo-message"
-          rows={4}
-          className="w-full rounded-xl border border-border bg-white px-3 py-3 sm:rounded-2xl"
+          rows={3}
+          className="w-full rounded-xl border border-[#d4af37]/25 bg-[#070604] px-3.5 py-3 text-sm text-white focus:border-[#e7c960] focus:outline-none focus:ring-1 focus:ring-[#e7c960] sm:rounded-2xl placeholder-[#625954]"
           value={message}
+          placeholder="Tell us what style or pieces you are looking for..."
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>
       <button
         type="submit"
         disabled={!canSubmit}
-        className="tap-lg inline-flex items-center justify-center rounded-full bg-forest px-6 font-semibold text-white disabled:opacity-50"
+        className="btn-gold tap-lg mt-2 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-bold shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {submitting ? formCopy.submitting : formCopy.submit}
       </button>
@@ -159,15 +163,15 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink-soft">
+      <label htmlFor={id} className="mb-1.5 block text-xs font-mono uppercase tracking-wider text-[#e7c960]">
         {label}
       </label>
       <input
         id={id}
         type={type}
         autoComplete={autoComplete}
-        className={`tap-lg w-full rounded-xl border bg-white px-3 sm:rounded-2xl ${
-          error ? 'border-red-500' : 'border-border'
+        className={`tap-lg w-full rounded-xl border bg-[#070604] px-3.5 text-sm text-white focus:border-[#e7c960] focus:outline-none focus:ring-1 focus:ring-[#e7c960] sm:rounded-2xl ${
+          error ? 'border-red-500' : 'border-[#d4af37]/25'
         }`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -175,7 +179,7 @@ function Field({
         aria-describedby={error ? `${id}-err` : undefined}
       />
       {error && (
-        <p id={`${id}-err`} className="mt-1 text-xs text-red-600">
+        <p id={`${id}-err`} className="mt-1 text-xs text-red-400">
           {error}
         </p>
       )}
