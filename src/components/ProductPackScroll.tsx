@@ -3,6 +3,53 @@ import { FRAME_COUNT, framePath, progressToFrame } from '../lib/frames'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 const PRELOAD_CONCURRENCY = 8
+/** Keyframe spacing for the first preload pass */
+const PRELOAD_STRIDE = 6
+const PREFETCH_MAX_INFLIGHT = 6
+/** Target frame first, then ahead, then just behind */
+const PREFETCH_OFFSETS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -2]
+
+/**
+ * Load + decode a frame exactly once. Concurrent callers share the in-flight
+ * promise, so the draw loop can ask for a frame every tick without spawning
+ * duplicate Image objects (which flooded the main thread and froze scrolling).
+ */
+function requestFrame(
+  cache: (HTMLImageElement | null)[],
+  inflight: Map<number, Promise<void>>,
+  i: number,
+): Promise<void> {
+  if (cache[i]) return Promise.resolve()
+  const pending = inflight.get(i)
+  if (pending) return pending
+
+  const promise = new Promise<void>((resolve) => {
+    const img = new Image()
+    img.decoding = 'async'
+    const finish = () => {
+      if (img.complete && img.naturalWidth > 0) cache[i] = img
+      inflight.delete(i)
+      resolve()
+    }
+    img.onload = () => {
+      if (img.decode) img.decode().then(finish, finish)
+      else finish()
+    }
+    img.onerror = finish
+    img.src = framePath(i)
+  })
+  inflight.set(i, promise)
+  return promise
+}
+
+/** Closest loaded frame to `target` within `maxDistance`, or 0 if none */
+function nearestCached(cache: (HTMLImageElement | null)[], target: number, maxDistance: number): number {
+  for (let d = 0; d <= maxDistance; d++) {
+    if (target - d >= 1 && cache[target - d]) return target - d
+    if (target + d <= FRAME_COUNT && cache[target + d]) return target + d
+  }
+  return 0
+}
 
 type Props = {
   /** Rendered inside sticky hero on mobile (e.g. Story compact) */
@@ -133,6 +180,7 @@ export function ProductPackScroll({ mobileContent }: Props) {
   const trackRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
   const cacheRef = useRef<(HTMLImageElement | null)[]>(Array(FRAME_COUNT + 1).fill(null))
+  const inflightRef = useRef<Map<number, Promise<void>>>(new Map())
   const lastDrawnRef = useRef(0)
   const progressRef = useRef(0)
   const lastWidthRef = useRef(0)
@@ -144,51 +192,60 @@ export function ProductPackScroll({ mobileContent }: Props) {
   useEffect(() => {
     let cancelled = false
     const cache = cacheRef.current
+    const inflight = inflightRef.current
+    // Frames the preloader has already tried (so a failed frame isn't retried forever)
+    const attempted = new Set<number>()
     let loaded = 0
 
-    const loadFrame = (i: number) =>
-      new Promise<void>((resolve) => {
-        if (cache[i]) {
-          resolve()
-          return
-        }
-        const img = new Image()
-        img.decoding = 'async'
-        img.src = framePath(i)
-        const done = () => {
-          if (img.complete && img.naturalWidth > 0) cache[i] = img
-          loaded += 1
-          if (!cancelled) setLoadPct(Math.round((loaded / FRAME_COUNT) * 100))
-          resolve()
-        }
-        img.onload = () => {
-          if (img.decode) img.decode().then(done).catch(done)
-          else done()
-        }
-        img.onerror = () => {
-          loaded += 1
-          if (!cancelled) setLoadPct(Math.round((loaded / FRAME_COUNT) * 100))
-          resolve()
-        }
+    const loadFrame = (i: number) => {
+      attempted.add(i)
+      return requestFrame(cache, inflight, i).then(() => {
+        loaded += 1
+        if (!cancelled) setLoadPct(Math.round((loaded / FRAME_COUNT) * 100))
       })
+    }
 
-    const loadRange = async (from: number, to: number) => {
-      let next = from
-      await Promise.all(
+    const runWorkers = (pickNext: () => number) =>
+      Promise.all(
         Array.from({ length: PRELOAD_CONCURRENCY }, async () => {
-          while (next <= to && !cancelled) {
-            const i = next++
+          for (let i = pickNext(); i && !cancelled; i = pickNext()) {
             await loadFrame(i)
           }
         }),
       )
+
+    const isPending = (i: number) => !cache[i] && !inflight.has(i) && !attempted.has(i)
+
+    // Pass 1: sparse keyframes across the whole sequence, so a fast scroll always
+    // has a loaded frame within PRELOAD_STRIDE / 2 instead of freezing on an old one.
+    const strideFrames: number[] = []
+    for (let i = 1 + PRELOAD_STRIDE; i < FRAME_COUNT; i += PRELOAD_STRIDE) strideFrames.push(i)
+    strideFrames.push(FRAME_COUNT)
+    const nextStride = () => {
+      while (strideFrames.length) {
+        const i = strideFrames.shift()!
+        if (isPending(i)) return i
+      }
+      return 0
+    }
+
+    // Pass 2: fill the gaps, nearest to the current scroll position first.
+    const nextNearScroll = () => {
+      const t = progressToFrame(progressRef.current)
+      for (let d = 0; d < FRAME_COUNT; d++) {
+        if (t + d <= FRAME_COUNT && isPending(t + d)) return t + d
+        if (d > 0 && t - d >= 1 && isPending(t - d)) return t - d
+      }
+      return 0
     }
 
     ;(async () => {
-      await loadFrame(1)
-      if (!cancelled) setReady(true)
-      await loadRange(2, Math.min(20, FRAME_COUNT))
-      if (!cancelled) await loadRange(21, FRAME_COUNT)
+      const first = loadFrame(1).then(() => {
+        if (!cancelled) setReady(true)
+      })
+      await runWorkers(nextStride)
+      await first
+      if (!cancelled) await runWorkers(nextNearScroll)
     })()
 
     return () => {
@@ -229,6 +286,7 @@ export function ProductPackScroll({ mobileContent }: Props) {
 
     let raf = 0
     let dpr = 1
+    let lastPrefetchTarget = 0
     const WOBBLE_THRESHOLD = 160 // Chrome wobble guard
 
     const resize = (force = false) => {
@@ -296,20 +354,12 @@ export function ProductPackScroll({ mobileContent }: Props) {
       let frame = target
 
       if (!cache[frame]) {
-        if (lastDrawnRef.current && cache[lastDrawnRef.current]) {
-          frame = lastDrawnRef.current
-        } else {
-          for (let d = 0; d < 40; d++) {
-            if (cache[target - d]) {
-              frame = target - d
-              break
-            }
-            if (cache[target + d]) {
-              frame = target + d
-              break
-            }
-          }
-        }
+        // Prefer the nearest loaded frame so the canvas keeps tracking the scroll;
+        // only hold the last drawn frame when nothing close has loaded yet.
+        const near = nearestCached(cache, target, PRELOAD_STRIDE)
+        if (near) frame = near
+        else if (lastDrawnRef.current && cache[lastDrawnRef.current]) frame = lastDrawnRef.current
+        else frame = nearestCached(cache, target, FRAME_COUNT) || target
       }
 
       const mode = isMobile ? 'contain' : 'cover'
@@ -319,15 +369,14 @@ export function ProductPackScroll({ mobileContent }: Props) {
       }
 
       // Prefetch neighbors
-      if (!prefersReducedMotion) {
-        for (let d = -2; d <= 12; d++) {
+      if (!prefersReducedMotion && (target !== lastPrefetchTarget || !cache[target])) {
+        lastPrefetchTarget = target
+        const inflight = inflightRef.current
+        for (const d of PREFETCH_OFFSETS) {
           const i = target + d
-          if (i < 1 || i > FRAME_COUNT || cache[i]) continue
-          const img = new Image()
-          img.src = framePath(i)
-          img.onload = () => {
-            cache[i] = img
-          }
+          if (i < 1 || i > FRAME_COUNT || cache[i] || inflight.has(i)) continue
+          if (inflight.size >= PREFETCH_MAX_INFLIGHT + PRELOAD_CONCURRENCY) break
+          void requestFrame(cache, inflight, i)
         }
       }
 
