@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { visit } from '../../content/copy'
+import { framePath } from '../../lib/frames'
 
 export function Visit() {
   return (
@@ -43,7 +44,7 @@ export function Visit() {
         >
           <div className="relative overflow-hidden">
             <img
-              src="/frames/00000019_converted.webp"
+              src={framePath(19)}
               alt="Ambot365 Jewellery salon"
               className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               loading="lazy"
